@@ -1,27 +1,25 @@
 """Точка входа начиная с 3-й лекции"""
 import asyncio
 from os import getenv  # Переделал под pycharm в виртуальное окружение
+
+from aiogram import Bot, Dispatcher, types
 from aiogram.client.bot import DefaultBotProperties
-from aiogram import Bot, Dispatcher
+
 from aiogram.enums import ParseMode
 from aiogram.types import BotCommandScopeAllPrivateChats
-from dotenv import find_dotenv, load_dotenv
 
-from middlewares.db import DataBaseSession
+from dotenv import find_dotenv, load_dotenv
 
 load_dotenv(find_dotenv())
 
+from middlewares.db import DataBaseSession
+
 from database.engine import create_db, drop_db, session_maker
+
 from handlers.user_group import user_group_router
 from handlers.user_private import user_private_router
 from handlers.admin_private import admin_router
 
-from common.bot_cmds_list import private
-
-# from middlewares.db import CounterMiddleware
-
-
-# ALLOWED_UPDATES = ['message', 'edited_message', 'callback_query']
 
 bot = Bot(token=getenv('TOKEN'),
           default=DefaultBotProperties(parse_mode=ParseMode.HTML))  # Тоже редакция вместо os.getenv - сразу getenv
@@ -57,8 +55,7 @@ async def main():
 
     await bot.delete_webhook(drop_pending_updates=True)
     # await bot.delete_my_commands(scope=types.BotCommandScopeAllPrivateChats())
-    await bot.set_my_commands(commands=private, scope=BotCommandScopeAllPrivateChats())
-    # await dp.start_polling(bot, allowed_updates=ALLOWED_UPDATES)
+    # await bot.set_my_commands(commands=private, scope=BotCommandScopeAllPrivateChats())
     await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
 
 

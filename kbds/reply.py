@@ -1,12 +1,13 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, KeyboardButtonPollType
+from aiogram.types import KeyboardButton
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
+
 def get_keyboard(
-    *btns: str,
-    placeholder: str = None,
-    request_contact: int = None,
-    request_location: int = None,
-    sizes: tuple = (2,),
+        *btns: str,
+        placeholder: str = None,
+        request_contact: int = None,
+        request_location: int = None,
+        sizes: tuple = (2,),
 ):
     """
     Parameters request_contact and request_location must be as indexes of btns args for buttons you need.
