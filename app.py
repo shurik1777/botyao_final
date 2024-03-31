@@ -20,7 +20,6 @@ from handlers.user_group import user_group_router
 from handlers.user_private import user_private_router
 from handlers.admin_private import admin_router
 
-
 bot = Bot(token=getenv('TOKEN'),
           default=DefaultBotProperties(parse_mode=ParseMode.HTML))  # Тоже редакция вместо os.getenv - сразу getenv
 # bot = Bot(token=getenv('TOKEN'), default=DefaultBotProperties(parse_mode=ParseMode.HTML))  # Понадобится при смене версии на 3.5.0
